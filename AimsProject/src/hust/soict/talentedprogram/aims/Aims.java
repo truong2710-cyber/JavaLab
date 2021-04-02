@@ -1,0 +1,88 @@
+package hust.soict.talentedprogram.aims;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+import hust.soict.talentedprogram.aims.media.Book;
+import hust.soict.talentedprogram.aims.media.DigitalVideoDisc;
+import hust.soict.talentedprogram.aims.media.Media;
+import hust.soict.talentedprogram.aims.order.Order;
+
+public class Aims {
+	private static Order anOrder;
+	public static void main(String[] args) {
+		int id=0,n;
+		showMenu();
+		boolean check=false;
+		Scanner sc=new Scanner(System.in);
+		do {
+		n=sc.nextInt();
+		switch (n){
+			case 1:	
+				anOrder=new Order();
+				check=true;
+				break;
+			case 2:
+				if (check==false)
+					System.out.println("You have not created any order!");
+				else {
+					int j;
+					do {    
+					System.out.println("Book or DVD. Press 1 for Book, 2 for DVD.");
+					j=sc.nextInt();
+					sc.nextLine();
+					if (j!=1 && j!=2)
+						System.out.println("Invalid input! Please re-enter!");
+					} while(j!=1&&j!=2);
+					if (j==1) {
+						System.out.println("Enter book title:");
+						String title=sc.nextLine();
+						Book b=new Book(title);
+						b.setId(++id);
+						anOrder.addMedia(b);
+					}
+					if (j==2) {
+						System.out.println("Enter DVD title:");
+						String title=sc.nextLine();
+						DigitalVideoDisc dvd=new DigitalVideoDisc(title);
+						dvd.setId(++id);
+						anOrder.addMedia(dvd);
+					}
+				}
+				break;
+			case 3:
+				System.out.println("Enter item id: ");
+				int k;
+				do {
+					k=sc.nextInt();
+					if (k>id || k<1)
+						System.out.println("Invalid id. Please re-enter!");
+				} while(k>id || k<1);
+				anOrder.removeMedia(anOrder.getItemsOrdered().get(k-1));
+				System.out.println("Item removed successfully!");
+				break;
+			case 4:
+				anOrder.printList();
+				break;
+			case 0:
+				System.exit(0);
+				break;
+		}
+		}while(n!=0);
+		
+		
+		
+	}
+	public static void showMenu() {
+		System.out.println("Order Manager Application:");
+		System.out.println("--------------------------");
+		System.out.println("1. Create new order");
+		System.out.println("2. Add item to the order");
+		System.out.println("3. Delete item by id");
+		System.out.println("4. Display the items list of order");
+		System.out.println("0. Exit");
+		System.out.println("--------------------------");
+		System.out.println("Please choose a number: 0-1-2-3-4");
+	}
+}
