@@ -1,0 +1,19 @@
+package hust.soict.talentedprogram.aims.media;
+
+import java.util.ArrayList;
+
+public class CompactDisc extends Disc{
+	private String artist;
+	private ArrayList<Track> tracks;
+	public CompactDisc(int length, String director) {
+		super(length, director);
+		// TODO Auto-generated constructor stub
+	}
+	public String getArtist() {
+		return artist;
+	}
+	
+
+	
+
+}

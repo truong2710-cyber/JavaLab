@@ -1,0 +1,28 @@
+package hust.soict.talentedprogram.aims.media;
+
+import java.util.ArrayList;
+
+public class CompactDisc extends Disc{
+	private String artist;
+	private ArrayList<Track> tracks;
+	public CompactDisc(int length, String director) {
+		super(length, director);
+		// TODO Auto-generated constructor stub
+	}
+	public String getArtist() {
+		return artist;
+	}
+	public CompactDisc(String title, String category, String artist, ArrayList<Track> tracks) {
+		super(title, category);
+		this.artist = artist;
+		this.tracks = tracks;
+	}
+	public void addTrack(Track track) {
+		if (tracks.contains(track))
+			System.out.println("Track already in list");
+		else tracks.add(track);
+	}
+
+	
+
+}

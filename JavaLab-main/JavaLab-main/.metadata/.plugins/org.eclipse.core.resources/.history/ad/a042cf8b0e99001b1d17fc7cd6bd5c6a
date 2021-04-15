@@ -1,0 +1,13 @@
+package hust.soict.talentedprogram.aims.media;
+
+public class CompactDisc extends Disc{
+
+	public CompactDisc(int length, String director) {
+		super(length, director);
+		// TODO Auto-generated constructor stub
+	}
+
+
+	
+
+}
