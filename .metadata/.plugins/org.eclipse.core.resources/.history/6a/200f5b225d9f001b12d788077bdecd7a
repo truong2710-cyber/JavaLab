@@ -1,0 +1,18 @@
+package hust.soict.talentedprogram.test.media;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import hust.soict.talentedprogram.aims.media.Book;
+
+public class BookTest {
+	public static void main(String[] args) {
+		List<String> authors=new ArrayList<String>();
+		authors.add("Andersen");
+		authors.add("Johnson Will");
+		Book book=new Book("A thousand words","Romantic",authors);
+		book.setContent("According to Margaret Doody, the novel has a continuous and comprehensive history of about two thousand years, with its origins in the Ancient Greek and Roman novel, in Chivalric romance, and in the tradition of the Italian renaissance novella.[6] The ancient romance form was revived by Romanticism, especially the historical romances of Walter Scott and the Gothic novel.[7] Some, including M. H. Abrams and Walter Scott, have argued that a novel is a fiction narrative that displays a realistic depiction of the state of a society, while the romance encompasses any fictitious narrative that emphasizes marvellous or uncommon incidents");
+		book.processContent();
+		System.out.print(book.toString());
+	}
+}

@@ -1,0 +1,14 @@
+package hust.soict.talentedprogram.test.media;
+
+import hust.soict.talentedprogram.aims.media.Book;
+import hust.soict.talentedprogram.aims.media.DigitalVideoDisc;
+
+public class TestMediaCompareTo {
+	java.util.Collection collection = new java.util.ArrayList();
+	DigitalVideoDisc dvd1= new DigitalVideoDisc("The Lion King");
+	DigitalVideoDisc dvd2= new DigitalVideoDisc("Star Wars");
+	DigitalVideoDisc dvd3= new DigitalVideoDisc("Aladin");
+	Book book1=new Book("Programming in C");
+	collection
+	
+}

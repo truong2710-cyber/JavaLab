@@ -21,5 +21,14 @@ public class Track implements Playable {
 		System.out.println("Track length: " + this.getLength());
 		
 	}
+	@Override
+	public boolean equals(Object o) {
+		if (o instanceof Track) {
+			if (((Track) o).length==this.length && ((Track) o).title.equals(this.title))
+				return true;
+			else return false;
+		}
+		return false;
+	}
 	
 }

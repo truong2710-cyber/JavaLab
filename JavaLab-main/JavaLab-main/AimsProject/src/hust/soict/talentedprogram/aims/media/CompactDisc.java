@@ -2,7 +2,8 @@ package hust.soict.talentedprogram.aims.media;
 
 import java.util.ArrayList;
 
-public class CompactDisc extends Disc implements Playable{
+@SuppressWarnings("rawtypes")
+public class CompactDisc extends Disc implements Playable, Comparable {
 	private String artist;
 	private ArrayList<Track> tracks;
 	
@@ -34,6 +35,9 @@ public class CompactDisc extends Disc implements Playable{
 		}
 		return length;
 	}
+	public int getNumberOfTracks() {
+		return tracks.size();
+	}
 	@Override
 	public void play() {
 		System.out.println("Number of tracks in the disc: "+tracks.size());
@@ -41,7 +45,23 @@ public class CompactDisc extends Disc implements Playable{
 		for (Track track : tracks) {
 			track.play();
 		}
-		
+	}
+	public int compareTo (Object obj) {
+		if (obj instanceof CompactDisc) {
+			if (this.getNumberOfTracks()>((CompactDisc) obj).getNumberOfTracks())
+				return 1;
+			else if (this.getNumberOfTracks()<((CompactDisc) obj).getNumberOfTracks())
+				return -1;
+			else {
+				if (this.getLength()>((CompactDisc) obj).getLength())
+					return 1;
+				else return -1;
+			}
+		}
+		else {
+			System.out.println("Error!");
+			return -1;
+		}
 	}
 
 }

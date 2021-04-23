@@ -1,6 +1,7 @@
 package hust.soict.talentedprogram.aims.media;
 
-public class DigitalVideoDisc extends Disc implements Playable
+@SuppressWarnings("rawtypes")
+public class DigitalVideoDisc extends Disc implements Playable, Comparable
 {
 	
 	
@@ -52,5 +53,14 @@ public class DigitalVideoDisc extends Disc implements Playable
 	public void play() {
 		System.out.println("Playing DVD: " + this.getTitle());
 		System.out.println("DVD length: " + this.getLength());
+	}
+	public int compareTo (Object obj) {
+		if (obj instanceof DigitalVideoDisc) {
+			return ((Float)this.getCost()).compareTo((Float)((DigitalVideoDisc) obj).getCost());
+		}
+		else {
+			System.out.println("Error!");
+			return -1;
+		}
 	}
 }

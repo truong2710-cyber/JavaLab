@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 public class Order {
 	public static final int MAX_NUMBER_ORDERED=10;
-	private ArrayList<Media> itemsOrdered=new ArrayList<Media>();
+	private List<Media> itemsOrdered=new ArrayList<Media>();
 	private MyDate dateOrdered;
 	public static final int MAX_LIMITTED_ORDERS=5;
 	private static int nbOrders=0;
@@ -25,7 +25,7 @@ public class Order {
 	}
 	
 	public ArrayList<Media> getItemsOrdered() {
-		return itemsOrdered;
+		return (ArrayList<Media>)itemsOrdered;
 	}
 	public void addMedia(Media media) {
 		if (itemsOrdered.size()<MAX_NUMBER_ORDERED) {
