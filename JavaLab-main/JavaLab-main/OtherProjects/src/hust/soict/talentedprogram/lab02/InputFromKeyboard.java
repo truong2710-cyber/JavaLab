@@ -2,6 +2,7 @@ package hust.soict.talentedprogram.lab02;
 import java.util.Scanner;
 public class InputFromKeyboard {
 	public static void main(String[] args) {
+		@SuppressWarnings("resource")
 		Scanner keyboard=new Scanner(System.in);
 		System.out.println("What's your name?");
 		String strName=keyboard.nextLine();

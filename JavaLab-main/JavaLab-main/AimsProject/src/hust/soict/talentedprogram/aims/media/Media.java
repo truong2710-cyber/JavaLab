@@ -14,6 +14,10 @@ public abstract class Media implements Comparable{
 	public Media(String title) {
 		this.title = title;
 	}
+	public Media(String title, float cost) {
+		this.title = title;
+		this.cost=cost;
+	}
 	
 	public Media(String title, String category) {
 		this(title);
@@ -36,9 +40,9 @@ public abstract class Media implements Comparable{
 		return cost;
 	}
 	@Override 
-	public boolean equals(Object o) {
+	public boolean equals(Object o) throws NullPointerException,ClassCastException{
 		if (o instanceof Media) {
-			if (((Media) o).id==this.id)
+			if (((Media) o).getTitle().equals(this.title) &&((Media) o).getCost()==this.getCost())
 				return true;
 			else return false;
 		}
@@ -46,7 +50,7 @@ public abstract class Media implements Comparable{
 	}
 	public  int compareTo (Object obj) {
 		if (obj instanceof Media) {
-			return this.title.compareTo(((Media) obj).title);
+			return (int) (this.cost-(((Media) obj).getCost()));
 		}
 		else {
 			System.out.println("Error!");

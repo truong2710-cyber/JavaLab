@@ -23,7 +23,9 @@ public class Book extends Media {
 		super(title,category);
 		this.authors=authors;
 	}
-	
+	public Book(String title, float cost) {
+		super(title,cost);
+	}
 	public String getContent() {
 		return content;
 	}

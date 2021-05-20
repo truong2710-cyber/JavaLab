@@ -16,6 +16,7 @@ public class TestMediaCompareTo {
 		DigitalVideoDisc dvd1= new DigitalVideoDisc("The Lion King","","",1,(float) 1.2);
 		DigitalVideoDisc dvd2= new DigitalVideoDisc("Star Wars","","",1,(float) 0.1);
 		DigitalVideoDisc dvd3= new DigitalVideoDisc("Aladin","","",1,(float) 0.4);
+		@SuppressWarnings("unused")
 		Book book1=new Book("Programming in C");
 		collection.add(dvd1);
 		collection.add(dvd2);

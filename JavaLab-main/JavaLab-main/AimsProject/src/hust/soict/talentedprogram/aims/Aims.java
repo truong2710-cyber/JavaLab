@@ -59,7 +59,13 @@ public class Aims {
 						anOrder.addMedia(dvd);
 						System.out.println("Do you want to play this DVD (y/n)?");
 						String s=sc.nextLine();
-						if (s.equals("y")) dvd.play();
+						if (s.equals("y"))
+							try {
+								dvd.play();
+							} catch (PlayerException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
 					}
 					if (j==3) {
 						System.out.println("Enter CD title:");
@@ -68,7 +74,13 @@ public class Aims {
 						anOrder.addMedia(cd);
 						System.out.println("Do you want to play this CD (y/n)?");
 						String s=sc.nextLine();
-						if (s.equals("y")) cd.play();
+						if (s.equals("y"))
+							try {
+								cd.play();
+							} catch (PlayerException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
 					}
 				}
 				break;

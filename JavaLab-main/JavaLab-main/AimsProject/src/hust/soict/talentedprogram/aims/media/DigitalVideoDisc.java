@@ -1,5 +1,9 @@
 package hust.soict.talentedprogram.aims.media;
 
+import javax.swing.JOptionPane;
+
+import hust.soict.talentedprogram.aims.PlayerException;
+
 @SuppressWarnings("rawtypes")
 public class DigitalVideoDisc extends Disc implements Playable, Comparable
 {
@@ -21,6 +25,10 @@ public class DigitalVideoDisc extends Disc implements Playable, Comparable
 	public DigitalVideoDisc(String title) {
 		super(title);
 		
+	}
+	public DigitalVideoDisc(String title, float cost) {
+		super(title);
+		this.cost=cost;
 	}
 	public DigitalVideoDisc(String title, String category) {
 		super(title,category);
@@ -50,9 +58,15 @@ public class DigitalVideoDisc extends Disc implements Playable, Comparable
 		return true;
 	}
 	@Override
-	public void play() {
-		System.out.println("Playing DVD: " + this.getTitle());
-		System.out.println("DVD length: " + this.getLength());
+	public void play() throws PlayerException {
+		if (this.getLength()>0) {
+			System.out.println("Playing DVD: " + this.getTitle());
+			System.out.println("DVD length: " + this.getLength());
+		}
+		else {
+			JOptionPane.showMessageDialog(null, "ERROR: DVD length is non-positive!", "DVD Error", JOptionPane.ERROR_MESSAGE, null);
+			throw new PlayerException("ERROR: DVD length is non-positive!");
+		}
 	}
 	public int compareTo (Object obj) {
 		if (obj instanceof DigitalVideoDisc) {

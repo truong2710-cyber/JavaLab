@@ -2,6 +2,10 @@ package hust.soict.talentedprogram.aims.media;
 
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
+import hust.soict.talentedprogram.aims.PlayerException;
+
 @SuppressWarnings("rawtypes")
 public class CompactDisc extends Disc implements Playable, Comparable {
 	private String artist;
@@ -17,6 +21,9 @@ public class CompactDisc extends Disc implements Playable, Comparable {
 	}
 	public CompactDisc(String title) {
 		super(title);
+	}
+	public CompactDisc(String title,float cost) {
+		super(title,cost);
 	}
 	public void addTrack(Track track) {
 		if (tracks.contains(track))
@@ -39,11 +46,23 @@ public class CompactDisc extends Disc implements Playable, Comparable {
 		return tracks.size();
 	}
 	@Override
-	public void play() {
-		System.out.println("Number of tracks in the disc: "+tracks.size());
-		System.out.println("Total length: "+this.getLength());
-		for (Track track : tracks) {
-			track.play();
+	public void play() throws PlayerException {
+		if (this.getLength()>0) {
+			System.out.println("Number of tracks in the disc: "+tracks.size());
+			System.out.println("Total length: "+this.getLength());
+			for (Track track : tracks) {
+				try {
+					track.play();
+				}
+				catch(PlayerException e){
+					throw e;
+				}
+			}
+		}
+		else {
+			JOptionPane.showMessageDialog(null, "ERROR: CD length is non-positive!", "CD Error", JOptionPane.ERROR_MESSAGE, null);
+			throw new PlayerException("ERROR: CD length is non-positive!");
+			
 		}
 	}
 	public int compareTo (Object obj) {

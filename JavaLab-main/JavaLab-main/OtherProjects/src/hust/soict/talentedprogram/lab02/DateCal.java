@@ -27,7 +27,8 @@ class Time{
 	}
 	public boolean checkValidYear() {
 		try {
-		    int intValue = Integer.parseInt(year);
+		    @SuppressWarnings("unused")
+			int intValue = Integer.parseInt(year);
 		    return true;
 		} catch (NumberFormatException e) {
 		    return false;
@@ -68,6 +69,7 @@ class Time{
 }
 public class DateCal {
 	public static void main(String[] args) {
+		@SuppressWarnings("resource")
 		Scanner sc=new Scanner(System.in);
 		Time t=new Time();
 		do {

@@ -14,6 +14,7 @@ public class ArraySorting {
 		}
 	}
 	public static void main(String[] args) {
+		@SuppressWarnings("resource")
 		Scanner sc=new Scanner(System.in);
 		System.out.println("Input array length: ");
 		int n=sc.nextInt();

@@ -1,14 +1,18 @@
 package hust.soict.talentedprogram.aims.order;
 import hust.soict.talentedprogram.aims.media.DigitalVideoDisc;
 import hust.soict.talentedprogram.aims.media.Book;
+import hust.soict.talentedprogram.aims.media.CompactDisc;
 import hust.soict.talentedprogram.aims.media.Media;
 import hust.soict.talentedprogram.aims.utils.MyDate;
 import java.lang.Math;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Random;
 public class Order {
-	public static final int MAX_NUMBER_ORDERED=10;
+	public static final int MAX_NUMBER_ORDERED=50;
 	private List<Media> itemsOrdered=new ArrayList<Media>();
 	private MyDate dateOrdered;
 	public static final int MAX_LIMITTED_ORDERS=5;
@@ -78,7 +82,7 @@ public class Order {
 		return cost;
 	}
 	public void print() {
-		Media d=getALuckyItem();
+		Media d=getALuckyItem(itemsOrdered.size(),this.totalCost());
 		System.out.println("****************************Order******************************");
 		System.out.print("Date: "); dateOrdered.print();
 		System.out.println("Ordered Items: ");
@@ -88,8 +92,8 @@ public class Order {
 				System.out.print((i+1)+". DVD - "+itemsOrdered.get(i).getTitle()+" - "+itemsOrdered.get(i).getCategory()+" - "+((DigitalVideoDisc)itemsOrdered.get(i)).getDirector()+" - "+((DigitalVideoDisc)itemsOrdered.get(i)).getLength()+": "+itemsOrdered.get(i).getCost()+"$");
 			else 
 				System.out.print((i+1)+". Book - "+itemsOrdered.get(i).getTitle()+" - "+itemsOrdered.get(i).getCategory()+" - "+((Book)itemsOrdered.get(i)).getAuthors()+": "+itemsOrdered.get(i).getCost()+"$");
-			if (itemsOrdered.get(i).getTitle().equals(d.getTitle())&&check==false) {
-				System.out.println(" Lucky item! Get for free!");
+			if (d!=null && itemsOrdered.get(i).getTitle().equals(d.getTitle())&&check==false) {
+				System.out.println(" Lucky item! Get 1 for free!");
 				check=true;
 			}
 			else System.out.println();
@@ -107,10 +111,51 @@ public class Order {
 			else 
 				System.out.print((i+1)+". Book - "+itemsOrdered.get(i).getTitle()+"\n");
 		}
-		System.out.println("****************************************************************");
+		System.out.println("***************************************************************");
 	}
-	public Media getALuckyItem() {
-		int i = (int)(Math.random()*(itemsOrdered.size()-1));
-		return itemsOrdered.get(i);
+	public String getBill(HashMap<Media,Integer> itemMap, float total, Media li) {
+		StringBuilder bill=new StringBuilder();
+		bill.append("****************************Order******************************\n");
+		bill.append("Date: "+dateOrdered.toString()+"\n"); 
+		bill.append("Ordered Items: "+"\n");
+		boolean check=false;
+		int i=0;
+		for(Map.Entry<Media, Integer> entry : itemMap.entrySet()) {
+			if (entry.getKey() instanceof Book)
+				bill.append((i+1)+". Book - "+entry.getKey().getTitle()+": "+entry.getKey().getCost()+"$ - "+"Amount: "+entry.getValue()+"\n");
+			if (entry.getKey() instanceof DigitalVideoDisc)
+				bill.append((i+1)+". DVD - "+entry.getKey().getTitle()+": "+entry.getKey().getCost()+"$ - "+"Amount: "+entry.getValue()+"\n");
+			if (entry.getKey() instanceof CompactDisc)
+				bill.append((i+1)+". CD - "+entry.getKey().getTitle()+": "+entry.getKey().getCost()+"$ - "+"Amount: "+entry.getValue()+"\n");
+			if (li!=null && entry.getKey().getTitle().equals(li.getTitle())&&check==false) {
+				bill.append(" Lucky item! Get 1 for free!"+"\n");
+				check=true;
+			}
+			else bill.append("\n");
+			i++;
+		}
+		if (li!=null)
+			bill.append("Total cost: "+(total-li.getCost())+"$"+"\n");
+		else
+			bill.append("Total cost: "+total+"$"+"\n");
+		bill.append("***************************************************************\n");
+		return bill.toString();
+	}
+	
+	
+	public Media getALuckyItem(int amount,float total) {
+		ArrayList<Media> temp= new ArrayList<Media>(itemsOrdered);
+		temp.sort((m1,m2)->(int)(m1.getCost()-m2.getCost()));
+		int n=itemsOrdered.size();
+		if (amount>=10 && total>=100) {
+			int start=(int)((n-1)*(2/Math.PI)*Math.atan(total-100));
+			if (start>=n) start=n-1;
+			Random rand = new Random();
+		    int i = rand.nextInt((n-1 - start) + 1) + start;
+		    //int i = ThreadLocalRandom.current().nextInt(start, n);
+		    System.out.println(n+"  "+start+"  "+i);
+			return temp.get(i);
+		}
+		return null;
 	}
 }

@@ -11,7 +11,7 @@ public class MyDate{
 		long millis=System.currentTimeMillis();   
 		java.sql.Date date=new java.sql.Date(millis);  
 		day=date.getDate();
-		month=date.getMonth();
+		month=date.getMonth()+1;
 		year=date.getYear()+1900;
 	}
 	public MyDate(int day, int month, int year) {
@@ -452,6 +452,9 @@ public class MyDate{
 	}
 	public void print() {
 		System.out.println(day+"-"+month+"-"+year);
+	}
+	public String toString() {
+		return (day+"-"+month+"-"+year);
 	}
 	public void printByFormat() {
 		System.out.println("Choose format: ");
